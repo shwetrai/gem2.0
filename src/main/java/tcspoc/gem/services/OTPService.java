@@ -1,6 +1,6 @@
 package tcspoc.gem.services;
 
-
+import tcspoc.gem.models.OTPValue;
 import tcspoc.gem.rest.OTPRemoteService;
 import org.eclipse.microprofile.faulttolerance.Fallback;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
@@ -15,7 +15,7 @@ public class OTPService {
     @RestClient
     OTPRemoteService otpRemoteService;
 
-    public Integer getOTP() {
+    public OTPValue getOTP() {
         return otpRemoteService.getOTP();
     }
 

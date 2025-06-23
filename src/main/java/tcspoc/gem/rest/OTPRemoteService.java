@@ -1,20 +1,20 @@
 package tcspoc.gem.rest;
 
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
-
+import tcspoc.gem.models.OTPValue;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 
-@Path("/v1.0")
-@RegisterRestClient
+
+@RegisterRestClient(baseUri="https://gem-backend-gem.apps.itz-mcyk8s.infra01-lb.dal14.techzone.ibm.com")
 public interface OTPRemoteService {
 
     @GET
     @Path("/registration/v1.0/generate-otp")
     @Produces("application/json")
-    Integer getOTP();
+    OTPValue getOTP();
 
     @GET
     @Path("/registration/v1.0/verify-otp/{otp}")
