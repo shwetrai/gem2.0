@@ -14,7 +14,7 @@ public interface OtpRemoteService {
     @GET
     @Path("/registration/v1.0/generate-otp")
     @Produces("application/json")
-    String getOTP();
+    Integer getOTP();
 
     @GET
     @Path("/registration/v1.0/verify-otp/{otp}")

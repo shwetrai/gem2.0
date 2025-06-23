@@ -15,7 +15,7 @@ public class OTPService {
     @RestClient
     OTPRemoteService otpRemoteService;
 
-    public String getOTP() {
+    public Integer getOTP() {
         return otpRemoteService.getOTP();
     }
 
