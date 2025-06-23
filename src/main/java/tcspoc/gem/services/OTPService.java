@@ -1,6 +1,6 @@
 package tcspoc.gem.services;
 
-import tcspoc.gem.models.User;
+
 import tcspoc.gem.rest.OTPRemoteService;
 import org.eclipse.microprofile.faulttolerance.Fallback;
 import org.eclipse.microprofile.rest.client.inject.RestClient;

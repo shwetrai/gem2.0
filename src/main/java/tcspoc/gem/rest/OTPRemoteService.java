@@ -9,7 +9,7 @@ import jakarta.ws.rs.Produces;
 
 @Path("/v1.0")
 @RegisterRestClient
-public interface OtpRemoteService {
+public interface OTPRemoteService {
 
     @GET
     @Path("/registration/v1.0/generate-otp")

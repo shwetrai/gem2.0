@@ -3,7 +3,7 @@ package tcspoc.gem.model;
 public class Applicant{
 
     private Integer mobile_no;
-    private Integre otp;
+    private Integer otp;
     private String name;
     private String email;
     private String bank_name;
@@ -18,11 +18,11 @@ public class Applicant{
         this.mobile_no = mobile_no;
     }
 
-    public Integre getOtp() {
+    public Integer getOtp() {
         return otp;
     }
 
-    public void setOtp(Integre otp) {
+    public void setOtp(Integer otp) {
         this.otp = otp;
     }
 
