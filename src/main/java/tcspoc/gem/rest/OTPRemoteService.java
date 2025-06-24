@@ -2,6 +2,7 @@ package tcspoc.gem.rest;
 
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 import tcspoc.gem.models.OTPValue;
+import tcspoc.gem.models.OTPVerification;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
@@ -19,6 +20,6 @@ public interface OTPRemoteService {
     @GET
     @Path("/registration/v1.0/verify-otp/{otp}")
     @Produces("application/json")
-    Boolean verifyOTP(@PathParam("otp") String otp);
+    OTPVerification verifyOTP(@PathParam("otp") Integer otp);
 
 }

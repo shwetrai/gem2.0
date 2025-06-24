@@ -2,6 +2,11 @@ package tcspoc.gem.services;
 
 import tcspoc.gem.models.Applicant;
 import tcspoc.gem.models.ApplicantRequest;
+import tcspoc.gem.models.UpdateAccountNo;
+import tcspoc.gem.models.UpdateBank;
+import tcspoc.gem.models.UpdateEmail;
+import tcspoc.gem.models.UpdateMobNotif;
+import tcspoc.gem.models.UpdateName;
 import tcspoc.gem.rest.ApplicantRemoteService;
 import org.eclipse.microprofile.faulttolerance.Fallback;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
@@ -16,37 +21,44 @@ public class ApplicantService {
     ApplicantRemoteService applicationRemoteService;
 
     public Applicant createApplicant(ApplicantRequest request) {
-        System.out.println("###### "+request.getMobile_no());
+        
         return applicationRemoteService.generateApplicantId(request);
     }
 
-    public Applicant setMobileNotification(String arn, boolean notificationSent) {
-        Applicant update = new Applicant();
-        update.setArn_mobile_notification_sent(notificationSent);
-        return applicationRemoteService.updateMobileNotification(arn, update);
+    public Applicant setMobileNotification(Applicant applicant) {
+       
+        String arn = applicant.getArn();
+        UpdateMobNotif updateMobNotif = new UpdateMobNotif();
+        updateMobNotif.setArn_mobile_notification_sent(true);
+
+        return applicationRemoteService.updateMobileNotification(arn, updateMobNotif);
     }
 
-    public Applicant updateApplicantName(String arn, String name) {
-        Applicant update = new Applicant();
-        update.setName(name);
+    public Applicant updateApplicantName(Applicant applicant) {
+        String arn = applicant.getArn();
+        UpdateName update = new UpdateName();
+        update.setName(applicant.getName());
         return applicationRemoteService.updateName(arn, update);
     }
 
-    public Applicant updateApplicantEmail(String arn, String email) {
-        Applicant update = new Applicant();
-        update.setEmail(email);
+    public Applicant updateApplicantEmail(Applicant applicant) {
+        String arn = applicant.getArn();
+        UpdateEmail update = new UpdateEmail();
+        update.setEmail(applicant.getEmail());
         return applicationRemoteService.updateEmail(arn, update);
     }
 
-    public Applicant updateApplicantBank(String arn, String bankName) {
-        Applicant update = new Applicant();
-        update.setBank_name(bankName);
+    public Applicant updateApplicantBank(Applicant applicant) {
+        String arn = applicant.getArn();
+        UpdateBank update = new UpdateBank();
+        update.setBank_name(applicant.getBank_name());
         return applicationRemoteService.updateBank(arn, update);
     }
 
-    public Applicant updateApplicantAccount(String arn, String accountNo) {
-        Applicant update = new Applicant();
-        update.setAccount_no(accountNo);
+    public Applicant updateApplicantAccount(Applicant applicant) {
+        String arn = applicant.getArn();
+        UpdateAccountNo update = new UpdateAccountNo();
+        update.setAccount_no(applicant.getAccount_no());
         return applicationRemoteService.updateAccount(arn, update);
     }
 

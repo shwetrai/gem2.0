@@ -1,6 +1,7 @@
 package tcspoc.gem.services;
 
 import tcspoc.gem.models.OTPValue;
+import tcspoc.gem.models.OTPVerification;
 import tcspoc.gem.rest.OTPRemoteService;
 import org.eclipse.microprofile.faulttolerance.Fallback;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
@@ -19,7 +20,8 @@ public class OTPService {
         return otpRemoteService.getOTP();
     }
 
-    public Boolean verifyOTP(String otp){
+    public OTPVerification verifyOTP(OTPValue otpValue){
+        Integer otp = otpValue.getOtp();
         return otpRemoteService.verifyOTP(otp);
     }
 }

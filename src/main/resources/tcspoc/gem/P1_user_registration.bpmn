@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn2:definitions xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" xmlns:xsi="xsi" id="_YU3fADMPED6GlfesM4MFrw" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd http://www.omg.org/spec/DD/20100524/DC DC.xsd http://www.omg.org/spec/DD/20100524/DI DI.xsd " exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
+<bpmn2:definitions xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" xmlns:xsi="xsi" id="_9JHJQDMXED6A0fcXVX8UvQ" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd http://www.omg.org/spec/DD/20100524/DC DC.xsd http://www.omg.org/spec/DD/20100524/DI DI.xsd " exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
   <bpmn2:itemDefinition id="_otpValueItem" structureRef="tcspoc.gem.models.OTPValue"/>
-  <bpmn2:itemDefinition id="_applicantItem" structureRef="tcspoc.gem.models.ApplicantRequest"/>
+  <bpmn2:itemDefinition id="_applicantReqItem" structureRef="tcspoc.gem.models.ApplicantRequest"/>
   <bpmn2:itemDefinition id="_applicantInfoItem" structureRef="tcspoc.gem.models.Applicant"/>
+  <bpmn2:itemDefinition id="_otpVerificationItem" structureRef="tcspoc.gem.models.OTPVerification"/>
   <bpmn2:itemDefinition id="_F69E3D6F-1D02-4120-BC8B-C59302C40B46_InMessageType" structureRef=""/>
   <bpmn2:itemDefinition id="_F69E3D6F-1D02-4120-BC8B-C59302C40B46_OutMessageType" structureRef=""/>
   <bpmn2:itemDefinition id="__F69E3D6F-1D02-4120-BC8B-C59302C40B46_ResultOutputXItem" structureRef="tcspoc.gem.models.OTPValue"/>
@@ -12,6 +13,12 @@
   <bpmn2:itemDefinition id="__6D97A9B1-BDFE-4F11-8965-C70D50F977B2_ResultOutputXItem" structureRef="tcspoc.gem.models.Applicant"/>
   <bpmn2:itemDefinition id="_6DAE7A2B-9CBF-436A-83AE-B1D9687BB132_InMessageType" structureRef=""/>
   <bpmn2:itemDefinition id="_6DAE7A2B-9CBF-436A-83AE-B1D9687BB132_OutMessageType" structureRef=""/>
+  <bpmn2:itemDefinition id="__6DAE7A2B-9CBF-436A-83AE-B1D9687BB132_ParameterInputXItem" structureRef="tcspoc.gem.models.OTPValue"/>
+  <bpmn2:itemDefinition id="__6DAE7A2B-9CBF-436A-83AE-B1D9687BB132_ResultOutputXItem" structureRef="tcspoc.gem.models.OTPVerification"/>
+  <bpmn2:itemDefinition id="_16744818-9475-4A17-A955-8C7083602099_InMessageType" structureRef=""/>
+  <bpmn2:itemDefinition id="_16744818-9475-4A17-A955-8C7083602099_OutMessageType" structureRef=""/>
+  <bpmn2:itemDefinition id="__16744818-9475-4A17-A955-8C7083602099_ParameterInputXItem" structureRef="tcspoc.gem.models.Applicant"/>
+  <bpmn2:itemDefinition id="__16744818-9475-4A17-A955-8C7083602099_ResultOutputXItem" structureRef="tcspoc.gem.models.Applicant"/>
   <bpmn2:message id="_F69E3D6F-1D02-4120-BC8B-C59302C40B46_InMessage" itemRef="_F69E3D6F-1D02-4120-BC8B-C59302C40B46_InMessageType"/>
   <bpmn2:message id="_F69E3D6F-1D02-4120-BC8B-C59302C40B46_OutMessage" itemRef="_F69E3D6F-1D02-4120-BC8B-C59302C40B46_OutMessageType"/>
   <bpmn2:interface id="_F69E3D6F-1D02-4120-BC8B-C59302C40B46_ServiceInterface" name="tcspoc.gem.services.OTPService" implementationRef="tcspoc.gem.services.OTPService">
@@ -36,18 +43,55 @@
       <bpmn2:outMessageRef>_6DAE7A2B-9CBF-436A-83AE-B1D9687BB132_OutMessage</bpmn2:outMessageRef>
     </bpmn2:operation>
   </bpmn2:interface>
-  <bpmn2:collaboration id="_71289B1B-DC16-4657-94D2-E1A33D16638A" name="Default Collaboration">
-    <bpmn2:participant id="_B057E298-A08D-4B87-B044-4215078B4307" name="Pool Participant" processRef="registration"/>
+  <bpmn2:message id="_16744818-9475-4A17-A955-8C7083602099_InMessage" itemRef="_16744818-9475-4A17-A955-8C7083602099_InMessageType"/>
+  <bpmn2:message id="_16744818-9475-4A17-A955-8C7083602099_OutMessage" itemRef="_16744818-9475-4A17-A955-8C7083602099_OutMessageType"/>
+  <bpmn2:interface id="_16744818-9475-4A17-A955-8C7083602099_ServiceInterface" name="tcspoc.gem.services.ApplicantService" implementationRef="tcspoc.gem.services.ApplicantService">
+    <bpmn2:operation id="_16744818-9475-4A17-A955-8C7083602099_ServiceOperation" name="setMobileNotification" implementationRef="setMobileNotification">
+      <bpmn2:inMessageRef>_16744818-9475-4A17-A955-8C7083602099_InMessage</bpmn2:inMessageRef>
+      <bpmn2:outMessageRef>_16744818-9475-4A17-A955-8C7083602099_OutMessage</bpmn2:outMessageRef>
+    </bpmn2:operation>
+  </bpmn2:interface>
+  <bpmn2:collaboration id="_2E7C5B34-1F60-4284-A8C6-65C8637B51B7" name="Default Collaboration">
+    <bpmn2:participant id="_4956C163-B5D8-48BD-965D-DAB8C6FD89A9" name="Pool Participant" processRef="registration"/>
   </bpmn2:collaboration>
   <bpmn2:process id="registration" drools:packageName="tcspoc.gem" drools:version="1.0" drools:adHoc="false" name="registration" isExecutable="true" processType="Public">
     <bpmn2:documentation><![CDATA[registration]]></bpmn2:documentation>
     <bpmn2:property id="otpValue" itemSubjectRef="_otpValueItem" name="otpValue"/>
-    <bpmn2:property id="applicant" itemSubjectRef="_applicantItem" name="applicant"/>
+    <bpmn2:property id="applicantReq" itemSubjectRef="_applicantReqItem" name="applicantReq"/>
     <bpmn2:property id="applicantInfo" itemSubjectRef="_applicantInfoItem" name="applicantInfo"/>
+    <bpmn2:property id="otpVerification" itemSubjectRef="_otpVerificationItem" name="otpVerification"/>
+    <bpmn2:sequenceFlow id="_15807AA0-B9BD-414D-A5E3-9C48E0AFB0E9" sourceRef="_6D97A9B1-BDFE-4F11-8965-C70D50F977B2" targetRef="_16744818-9475-4A17-A955-8C7083602099"/>
     <bpmn2:sequenceFlow id="_2EEDD3D0-3F34-4105-8768-DE2A15D5E7F1" sourceRef="_6DAE7A2B-9CBF-436A-83AE-B1D9687BB132" targetRef="_6D97A9B1-BDFE-4F11-8965-C70D50F977B2"/>
-    <bpmn2:sequenceFlow id="_1C32C9E9-1405-41B2-872A-EBEC8E4C96EA" sourceRef="_6D97A9B1-BDFE-4F11-8965-C70D50F977B2" targetRef="_BD7B0D3E-5AA6-4BC8-B8F0-B3B2919DDB83"/>
+    <bpmn2:sequenceFlow id="_ED6FAB8E-9E5E-48FF-9009-03D9A4FA3776" sourceRef="_16744818-9475-4A17-A955-8C7083602099" targetRef="_BD7B0D3E-5AA6-4BC8-B8F0-B3B2919DDB83"/>
     <bpmn2:sequenceFlow id="_41EC4C5F-110A-49E8-9A46-B2FF8A37EB86" sourceRef="_F69E3D6F-1D02-4120-BC8B-C59302C40B46" targetRef="_6DAE7A2B-9CBF-436A-83AE-B1D9687BB132"/>
     <bpmn2:sequenceFlow id="_B311BBFC-7A93-4657-8247-0C2BECBFD130" sourceRef="_7B780141-3583-4525-B235-A0D6286ABD74" targetRef="_F69E3D6F-1D02-4120-BC8B-C59302C40B46"/>
+    <bpmn2:serviceTask id="_16744818-9475-4A17-A955-8C7083602099" drools:serviceimplementation="Java" drools:serviceinterface="tcspoc.gem.services.ApplicantService" drools:serviceoperation="setMobileNotification" name="Notify Applicant" implementation="Java" operationRef="_16744818-9475-4A17-A955-8C7083602099_ServiceOperation">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Notify Applicant]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_15807AA0-B9BD-414D-A5E3-9C48E0AFB0E9</bpmn2:incoming>
+      <bpmn2:outgoing>_ED6FAB8E-9E5E-48FF-9009-03D9A4FA3776</bpmn2:outgoing>
+      <bpmn2:ioSpecification>
+        <bpmn2:dataInput id="_16744818-9475-4A17-A955-8C7083602099_ParameterInputX" drools:dtype="tcspoc.gem.models.Applicant" itemSubjectRef="__16744818-9475-4A17-A955-8C7083602099_ParameterInputXItem" name="Parameter"/>
+        <bpmn2:dataOutput id="_16744818-9475-4A17-A955-8C7083602099_ResultOutputX" drools:dtype="tcspoc.gem.models.Applicant" itemSubjectRef="__16744818-9475-4A17-A955-8C7083602099_ResultOutputXItem" name="Result"/>
+        <bpmn2:inputSet>
+          <bpmn2:dataInputRefs>_16744818-9475-4A17-A955-8C7083602099_ParameterInputX</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet>
+          <bpmn2:dataOutputRefs>_16744818-9475-4A17-A955-8C7083602099_ResultOutputX</bpmn2:dataOutputRefs>
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation>
+        <bpmn2:sourceRef>applicantInfo</bpmn2:sourceRef>
+        <bpmn2:targetRef>_16744818-9475-4A17-A955-8C7083602099_ParameterInputX</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataOutputAssociation>
+        <bpmn2:sourceRef>_16744818-9475-4A17-A955-8C7083602099_ResultOutputX</bpmn2:sourceRef>
+        <bpmn2:targetRef>applicantInfo</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+    </bpmn2:serviceTask>
     <bpmn2:serviceTask id="_6DAE7A2B-9CBF-436A-83AE-B1D9687BB132" drools:serviceimplementation="Java" drools:serviceinterface="tcspoc.gem.services.OTPService" drools:serviceoperation="verifyOTP" name="Verify OTP" implementation="Java" operationRef="_6DAE7A2B-9CBF-436A-83AE-B1D9687BB132_ServiceOperation">
       <bpmn2:extensionElements>
         <drools:metaData name="elementname">
@@ -56,6 +100,24 @@
       </bpmn2:extensionElements>
       <bpmn2:incoming>_41EC4C5F-110A-49E8-9A46-B2FF8A37EB86</bpmn2:incoming>
       <bpmn2:outgoing>_2EEDD3D0-3F34-4105-8768-DE2A15D5E7F1</bpmn2:outgoing>
+      <bpmn2:ioSpecification>
+        <bpmn2:dataInput id="_6DAE7A2B-9CBF-436A-83AE-B1D9687BB132_ParameterInputX" drools:dtype="tcspoc.gem.models.OTPValue" itemSubjectRef="__6DAE7A2B-9CBF-436A-83AE-B1D9687BB132_ParameterInputXItem" name="Parameter"/>
+        <bpmn2:dataOutput id="_6DAE7A2B-9CBF-436A-83AE-B1D9687BB132_ResultOutputX" drools:dtype="tcspoc.gem.models.OTPVerification" itemSubjectRef="__6DAE7A2B-9CBF-436A-83AE-B1D9687BB132_ResultOutputXItem" name="Result"/>
+        <bpmn2:inputSet>
+          <bpmn2:dataInputRefs>_6DAE7A2B-9CBF-436A-83AE-B1D9687BB132_ParameterInputX</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet>
+          <bpmn2:dataOutputRefs>_6DAE7A2B-9CBF-436A-83AE-B1D9687BB132_ResultOutputX</bpmn2:dataOutputRefs>
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation>
+        <bpmn2:sourceRef>otpValue</bpmn2:sourceRef>
+        <bpmn2:targetRef>_6DAE7A2B-9CBF-436A-83AE-B1D9687BB132_ParameterInputX</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataOutputAssociation>
+        <bpmn2:sourceRef>_6DAE7A2B-9CBF-436A-83AE-B1D9687BB132_ResultOutputX</bpmn2:sourceRef>
+        <bpmn2:targetRef>otpVerification</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
     </bpmn2:serviceTask>
     <bpmn2:serviceTask id="_6D97A9B1-BDFE-4F11-8965-C70D50F977B2" drools:serviceimplementation="Java" drools:serviceinterface="tcspoc.gem.services.ApplicantService" drools:serviceoperation="createApplicant" name="Create Applicant" implementation="Java" operationRef="_6D97A9B1-BDFE-4F11-8965-C70D50F977B2_ServiceOperation">
       <bpmn2:extensionElements>
@@ -64,7 +126,7 @@
         </drools:metaData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>_2EEDD3D0-3F34-4105-8768-DE2A15D5E7F1</bpmn2:incoming>
-      <bpmn2:outgoing>_1C32C9E9-1405-41B2-872A-EBEC8E4C96EA</bpmn2:outgoing>
+      <bpmn2:outgoing>_15807AA0-B9BD-414D-A5E3-9C48E0AFB0E9</bpmn2:outgoing>
       <bpmn2:ioSpecification>
         <bpmn2:dataInput id="_6D97A9B1-BDFE-4F11-8965-C70D50F977B2_ParameterInputX" drools:dtype="tcspoc.gem.models.ApplicantRequest" itemSubjectRef="__6D97A9B1-BDFE-4F11-8965-C70D50F977B2_ParameterInputXItem" name="Parameter"/>
         <bpmn2:dataOutput id="_6D97A9B1-BDFE-4F11-8965-C70D50F977B2_ResultOutputX" drools:dtype="tcspoc.gem.models.Applicant" itemSubjectRef="__6D97A9B1-BDFE-4F11-8965-C70D50F977B2_ResultOutputXItem" name="Result"/>
@@ -76,7 +138,7 @@
         </bpmn2:outputSet>
       </bpmn2:ioSpecification>
       <bpmn2:dataInputAssociation>
-        <bpmn2:sourceRef>applicant</bpmn2:sourceRef>
+        <bpmn2:sourceRef>applicantReq</bpmn2:sourceRef>
         <bpmn2:targetRef>_6D97A9B1-BDFE-4F11-8965-C70D50F977B2_ParameterInputX</bpmn2:targetRef>
       </bpmn2:dataInputAssociation>
       <bpmn2:dataOutputAssociation>
@@ -85,7 +147,7 @@
       </bpmn2:dataOutputAssociation>
     </bpmn2:serviceTask>
     <bpmn2:endEvent id="_BD7B0D3E-5AA6-4BC8-B8F0-B3B2919DDB83">
-      <bpmn2:incoming>_1C32C9E9-1405-41B2-872A-EBEC8E4C96EA</bpmn2:incoming>
+      <bpmn2:incoming>_ED6FAB8E-9E5E-48FF-9009-03D9A4FA3776</bpmn2:incoming>
     </bpmn2:endEvent>
     <bpmn2:serviceTask id="_F69E3D6F-1D02-4120-BC8B-C59302C40B46" drools:serviceimplementation="Java" drools:serviceinterface="tcspoc.gem.services.OTPService" drools:serviceoperation="getOTP" name="Generate_otp" implementation="Java" operationRef="_F69E3D6F-1D02-4120-BC8B-C59302C40B46_ServiceOperation">
       <bpmn2:extensionElements>
@@ -119,13 +181,16 @@
         <dc:Bounds height="102" width="154" x="431" y="101"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__BD7B0D3E-5AA6-4BC8-B8F0-B3B2919DDB83" bpmnElement="_BD7B0D3E-5AA6-4BC8-B8F0-B3B2919DDB83">
-        <dc:Bounds height="56" width="56" x="1268" y="118"/>
+        <dc:Bounds height="56" width="56" x="1495" y="118"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__6D97A9B1-BDFE-4F11-8965-C70D50F977B2" bpmnElement="_6D97A9B1-BDFE-4F11-8965-C70D50F977B2">
         <dc:Bounds height="102" width="154" x="913" y="95"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__6DAE7A2B-9CBF-436A-83AE-B1D9687BB132" bpmnElement="_6DAE7A2B-9CBF-436A-83AE-B1D9687BB132">
         <dc:Bounds height="102" width="154" x="665" y="101"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape__16744818-9475-4A17-A955-8C7083602099" bpmnElement="_16744818-9475-4A17-A955-8C7083602099">
+        <dc:Bounds height="102" width="154" x="1147" y="95"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="edge_shape__7B780141-3583-4525-B235-A0D6286ABD74_to_shape__F69E3D6F-1D02-4120-BC8B-C59302C40B46" bpmnElement="_B311BBFC-7A93-4657-8247-0C2BECBFD130">
         <di:waypoint x="205" y="152"/>
@@ -135,13 +200,17 @@
         <di:waypoint x="508" y="152"/>
         <di:waypoint x="742" y="152"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="edge_shape__6D97A9B1-BDFE-4F11-8965-C70D50F977B2_to_shape__BD7B0D3E-5AA6-4BC8-B8F0-B3B2919DDB83" bpmnElement="_1C32C9E9-1405-41B2-872A-EBEC8E4C96EA">
-        <di:waypoint x="990" y="146"/>
-        <di:waypoint x="1268" y="146"/>
+      <bpmndi:BPMNEdge id="edge_shape__16744818-9475-4A17-A955-8C7083602099_to_shape__BD7B0D3E-5AA6-4BC8-B8F0-B3B2919DDB83" bpmnElement="_ED6FAB8E-9E5E-48FF-9009-03D9A4FA3776">
+        <di:waypoint x="1224" y="146"/>
+        <di:waypoint x="1495" y="146"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge_shape__6DAE7A2B-9CBF-436A-83AE-B1D9687BB132_to_shape__6D97A9B1-BDFE-4F11-8965-C70D50F977B2" bpmnElement="_2EEDD3D0-3F34-4105-8768-DE2A15D5E7F1">
         <di:waypoint x="742" y="152"/>
         <di:waypoint x="913" y="146"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge_shape__6D97A9B1-BDFE-4F11-8965-C70D50F977B2_to_shape__16744818-9475-4A17-A955-8C7083602099" bpmnElement="_15807AA0-B9BD-414D-A5E3-9C48E0AFB0E9">
+        <di:waypoint x="990" y="146"/>
+        <di:waypoint x="1224" y="146"/>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
@@ -217,10 +286,30 @@
               </bpsim:UnitCost>
             </bpsim:CostParameters>
           </bpsim:ElementParameters>
+          <bpsim:ElementParameters elementRef="_16744818-9475-4A17-A955-8C7083602099">
+            <bpsim:TimeParameters>
+              <bpsim:ProcessingTime>
+                <bpsim:NormalDistribution mean="0" standardDeviation="0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:ResourceParameters>
+              <bpsim:Availability>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:Availability>
+              <bpsim:Quantity>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:Quantity>
+            </bpsim:ResourceParameters>
+            <bpsim:CostParameters>
+              <bpsim:UnitCost>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:UnitCost>
+            </bpsim:CostParameters>
+          </bpsim:ElementParameters>
         </bpsim:Scenario>
       </bpsim:BPSimData>
     </bpmn2:extensionElements>
-    <bpmn2:source>_YU3fADMPED6GlfesM4MFrw</bpmn2:source>
-    <bpmn2:target>_YU3fADMPED6GlfesM4MFrw</bpmn2:target>
+    <bpmn2:source>_9JHJQDMXED6A0fcXVX8UvQ</bpmn2:source>
+    <bpmn2:target>_9JHJQDMXED6A0fcXVX8UvQ</bpmn2:target>
   </bpmn2:relationship>
 </bpmn2:definitions>
