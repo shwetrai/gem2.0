@@ -69,10 +69,10 @@ public class ApplicantService {
     }
 
 
-    public Applicant updatePAN(Applicant applicant){
+    public Applicant updatePAN(Applicant applicant, String pan){
         String arn = applicant.getArn();
         UpdatePAN update= new UpdatePAN();
-        update.setPan(applicant.getPan());
+        update.setPan(pan);
         //update.setPan("AJIPTR5623Q");
         update.setPan_verified(true);
         return applicationRemoteService.updatePAN(arn, update);
