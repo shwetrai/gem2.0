@@ -8,6 +8,8 @@ import tcspoc.gem.models.UpdateBank;
 import tcspoc.gem.models.UpdateEmail;
 import tcspoc.gem.models.UpdateMobNotif;
 import tcspoc.gem.models.UpdateName;
+import tcspoc.gem.models.UpdatePAN;
+import tcspoc.gem.models.UpdatePANNotification;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 
@@ -49,5 +51,19 @@ public interface ApplicantRemoteService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     Applicant updateAccount(@PathParam("arn") String arn, UpdateAccountNo update);
+
+
+    @PUT
+    @Path("/registration/v1.0/verify-pan/{arn}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    Applicant updatePAN(@PathParam("arn") String arn, UpdatePAN update);
+
+    @PUT
+    @Path("/registration/v1.0/notify-pan-verification/{arn}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    Applicant updatePANNotification(@PathParam("arn") String arn, UpdatePANNotification update);
+
 
 }
